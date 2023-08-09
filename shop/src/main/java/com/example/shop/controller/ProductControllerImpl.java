@@ -16,7 +16,6 @@ public class ProductControllerImpl implements ProductsApi {
 
     private final ProductService productService;
 
-    @Autowired
     public ProductControllerImpl(ProductService productService) {
         this.productService = productService;
     }

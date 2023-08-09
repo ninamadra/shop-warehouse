@@ -86,7 +86,8 @@ public class ProductServiceImpl implements ProductService {
         productOptional.ifPresent(product -> {
             product.setQuantity(quantity);
             logger.info("Product found: {}, {}, {}", product.getId(), product.getName(), product.getQuantity());
-            productRepository.save(product);
+            Product saved = productRepository.save(product);
+            logger.info("Product saved: {}, {}, {}", saved.getId(), saved.getName(), saved.getQuantity());
         });
     }
 

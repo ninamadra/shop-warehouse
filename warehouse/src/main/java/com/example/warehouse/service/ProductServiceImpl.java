@@ -21,13 +21,22 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void checkQuantityAndSendStatus(Long productId) {
         Optional<Product> productOptional = productRepository.findById(productId);
-        productOptional.ifPresent(product -> {
-            ProductMessage productMessage = new ProductMessage();
-            productMessage.setId(product.getId());
-            productMessage.setQuantity(product.getQuantity());
+        Product product;
 
-            kafkaProducer.sendProductMessage(productMessage);
-        });
+        if (productOptional.isPresent()) {
+            product = productOptional.get();
+        } else {
+            product = new Product();
+            product.setId(productId);
+            productRepository.save(product);
+        }
+
+        ProductMessage productMessage = new ProductMessage();
+        productMessage.setId(product.getId());
+        productMessage.setQuantity(product.getQuantity());
+
+        kafkaProducer.sendProductMessage(productMessage);
+
     }
 
 }

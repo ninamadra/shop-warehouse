@@ -20,9 +20,8 @@ components:
         productTypeDTO:
           type: string
           enum: [FRUITS, VEGETABLES, OTHER]
-        quantity:   # New property for ProductReadDTO
+        quantity:
           type: integer
-          nullable: true   # Quantity can be null in ProductReadDTO
       required:
         - name
         - productTypeDTO
