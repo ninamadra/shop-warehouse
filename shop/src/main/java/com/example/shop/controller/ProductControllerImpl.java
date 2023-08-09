@@ -4,7 +4,6 @@ import com.example.shop.service.ProductService;
 import org.openapitools.api.ProductsApi;
 import org.openapitools.model.ProductReadDTO;
 import org.openapitools.model.ProductWriteDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 

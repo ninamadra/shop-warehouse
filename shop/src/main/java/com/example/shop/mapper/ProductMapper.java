@@ -3,7 +3,6 @@ package com.example.shop.mapper;
 import com.example.shop.model.Product;
 import com.example.shop.model.ProductType;
 import org.modelmapper.ModelMapper;
-import org.openapitools.jackson.nullable.JsonNullable;
 import org.openapitools.model.ProductReadDTO;
 import org.openapitools.model.ProductWriteDTO;
 import org.springframework.stereotype.Component;

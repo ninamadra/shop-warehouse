@@ -20,12 +20,6 @@ public class ProductKafkaConsumer {
     @KafkaListener(topics = "store_status", groupId = "product_group")
     public void consumeProductMessage(ProductMessage productMessage) {
         logger.info("Received product message: {}", productMessage);
-
-        Long productId = productMessage.getId();
-        Integer quantity = productMessage.getQuantity();
-
-        productService.updateProductQuantity(productId, quantity);
-
-        logger.info("Product quantity updated for product ID: {}", productId);
+        productService.updateProductQuantity(productMessage.getId(), productMessage.getQuantity());
     }
 }

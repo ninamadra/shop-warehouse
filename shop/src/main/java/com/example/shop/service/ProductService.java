@@ -8,9 +8,13 @@ import java.util.List;
 
 public interface ProductService {
     ResponseEntity<ProductReadDTO> createProduct(ProductWriteDTO productWriteDTO);
+
     ResponseEntity<ProductReadDTO> getProductById(Long id);
+
     ResponseEntity<List<ProductReadDTO>> getAllProducts();
+
     ResponseEntity<Void> deleteProductById(Long id);
+
     ResponseEntity<ProductReadDTO> updateProduct(Long id, ProductWriteDTO productWriteDTO);
 
     void updateProductQuantity(Long productId, Integer quantity);

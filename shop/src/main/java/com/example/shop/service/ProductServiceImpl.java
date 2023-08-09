@@ -8,8 +8,6 @@ import com.example.shop.repository.ProductRepository;
 import jakarta.transaction.Transactional;
 import org.openapitools.model.ProductReadDTO;
 import org.openapitools.model.ProductWriteDTO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +20,6 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductKafkaProducer kafkaProducer;
     private final ProductMapper productMapper;
-    private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
 
     public ProductServiceImpl(ProductRepository productRepository, ProductMapper productMapper, ProductKafkaProducer kafkaProducer) {
         this.productRepository = productRepository;
@@ -44,16 +41,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ResponseEntity<ProductReadDTO> getProductById(Long id) {
         Optional<Product> productOptional = productRepository.findById(id);
-
-        return productOptional.map(product -> ResponseEntity.ok(productMapper.toReadDTO(product)))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        return productOptional.map(product -> ResponseEntity.ok(productMapper.toReadDTO(product))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @Override
     public ResponseEntity<List<ProductReadDTO>> getAllProducts() {
-        List<ProductReadDTO> products =  productRepository.findAll().stream()
-                .map(productMapper::toReadDTO)
-                .toList();
+        List<ProductReadDTO> products = productRepository.findAll().stream().map(productMapper::toReadDTO).toList();
         return ResponseEntity.ok(products);
     }
 
@@ -63,7 +56,6 @@ public class ProductServiceImpl implements ProductService {
             productRepository.deleteById(id);
             return ResponseEntity.noContent().build();
         }
-
         return ResponseEntity.notFound().build();
     }
 
@@ -85,9 +77,7 @@ public class ProductServiceImpl implements ProductService {
         Optional<Product> productOptional = productRepository.findById(productId);
         productOptional.ifPresent(product -> {
             product.setQuantity(quantity);
-            logger.info("Product found: {}, {}, {}", product.getId(), product.getName(), product.getQuantity());
-            Product saved = productRepository.save(product);
-            logger.info("Product saved: {}, {}, {}", saved.getId(), saved.getName(), saved.getQuantity());
+            productRepository.save(product);
         });
     }
 

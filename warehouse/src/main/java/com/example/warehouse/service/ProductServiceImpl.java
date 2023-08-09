@@ -22,7 +22,6 @@ public class ProductServiceImpl implements ProductService {
     public void checkQuantityAndSendStatus(Long productId) {
         Optional<Product> productOptional = productRepository.findById(productId);
         Product product;
-
         if (productOptional.isPresent()) {
             product = productOptional.get();
         } else {

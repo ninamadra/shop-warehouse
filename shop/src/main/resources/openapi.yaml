@@ -19,7 +19,7 @@ components:
           format: date
         productTypeDTO:
           type: string
-          enum: [FRUITS, VEGETABLES, OTHER]
+          enum: [ FRUITS, VEGETABLES, OTHER ]
         quantity:
           type: integer
       required:
@@ -36,7 +36,7 @@ components:
           format: date
         productTypeDTO:
           type: string
-          enum: [FRUITS, VEGETABLES, OTHER]
+          enum: [ FRUITS, VEGETABLES, OTHER ]
       required:
         - name
         - productTypeDTO
